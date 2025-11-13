@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="text-center">
+    <h1>{{ game.title }}</h1>
+    <p class="text-muted">{{ game.genre }}</p>
+    <img src="{{ game.screenshot.url }}" class="img-fluid rounded shadow my-4" style="max-width:600px;">
+    <p>{{ game.description }}</p>
+
+    {% if game.trailer_url %}
+    <div class="ratio ratio-16x9 my-3">
+        <iframe src="{{ game.trailer_url }}" title="Game Trailer" allowfullscreen></iframe>
+    </div>
+    {% endif %}
+
+    <a href="{{ game.file.url }}" class="btn btn-primary mt-3" download>⬇ Download Game</a>
+</div>
+{% endblock %}

@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+/* Page background */
+body {
+    background: #0d0d0d !important;
+}
+
+/* Section Title */
+.page-title {
+    font-size: 2.8rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 40px;
+    color: #fff;
+}
+
+/* Game Card */
+.game-card {
+    background: #1a1a1a;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid #333;
+    transition: all 0.25s ease-in-out;
+    cursor: pointer;
+}
+
+.game-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0px 8px 25px rgba(255, 0, 0, 0.2);
+}
+
+/* Screenshot */
+.game-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+/* Card Text */
+.game-info {
+    padding: 15px;
+}
+
+.game-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.game-genre {
+    color: #bbb;
+    font-size: 0.9rem;
+}
+
+.view-btn {
+    margin-top: 10px;
+    display: inline-block;
+    padding: 8px 18px;
+    background: #e91e63;
+    border-radius: 8px;
+    color: #fff;
+    text-decoration: none;
+    transition: 0.2s ease;
+    font-weight: 500;
+}
+
+.view-btn:hover {
+    background: #ff2f7d;
+}
+
+/* Grid Layout */
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+}
+</style>
+
+<h1 class="page-title">🔥 Latest Indian Indie Games</h1>
+
+<div class="games-grid">
+    {% for game in games %}
+    <a href="{% url 'game-detail' game.pk %}" style="text-decoration: none;">
+        <div class="game-card">
+            <img src="{{ game.screenshot.url }}" alt="{{ game.title }}">
+
+            <div class="game-info">
+                <div class="game-title">{{ game.title }}</div>
+                <div class="game-genre">{{ game.genre }}</div>
+
+                <div>
+                    <span class="view-btn">View Game</span>
+                </div>
+            </div>
+        </div>
+    </a>
+    {% empty %}
+    <p style="color: white;">No games uploaded yet.</p>
+    {% endfor %}
+</div>
+
+{% endblock %}

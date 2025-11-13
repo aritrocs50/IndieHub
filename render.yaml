@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: indie-game-platform
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn indiehub.wsgi:application"
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: indiehub.settings
+      - key: PYTHON_VERSION
+        value: "3.12.0"
